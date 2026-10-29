@@ -2,7 +2,7 @@
 
 Seminar 2 exercises for the AI course (UET). Two graph problems share one search module and are exposed through an MCP server:
 
-- **U1 cities**: 8 Albanian cities, weighted undirected graph (km), shortest route by Dijkstra.
+- **U1 cities**: 8 Albanian cities, weighted undirected graph (km), shortest route by Dijkstra, or the best-quality route (Dijkstra on km x road-quality factor).
 - **U2 maze**: 25 rooms on a 5x5 grid, unweighted undirected graph, fewest-doors path by BFS.
 
 ## Dev environment
@@ -35,9 +35,9 @@ uv run python -m seminar2.tui                               # curses TUI: menu o
 - `seminar2/text.py`: `fold` (case/accent-insensitive key) and `plural`.
 - `seminar2/layout.py`: node positions (`CITY_POS`, `maze_position`) shared by draw, animate and the viewer.
 - `seminar2/animation.py`: shared matplotlib frame code for `cities/animate.py` and `maze/animate.py`.
-- `seminar2/cities/graph.py`, `seminar2/maze/maze.py`: CSV loaders plus validation (`load_graph`, `load_maze`).
-- `seminar2/dataset/`: `cities.csv` (`city_a,city_b,km`), `maze_doors.csv` (`room_a,room_b`), `maze_config.csv` (`key,value`: rooms, entrance, exit).
-- `seminar2/mcp_server.py`: 9 MCP tools: `list_cities`, `get_roads`, `shortest_route`, `get_maze`, `get_doors`, `find_path`, plus `trace_route`, `trace_maze` (step-by-step explanation; `detail=True` returns full events) and `live_viewer` (page URL). `shortest_route`, `find_path` and the trace tools publish their search to the viewer.
+- `seminar2/cities/graph.py`, `seminar2/maze/maze.py`: CSV loaders plus validation (`load_graph`, `load_roads` for the quality column, `load_maze`). `seminar2/cities/quality.py`: `QUALITY_FACTOR` and the quality-weighted route (reuses `Graph`).
+- `seminar2/dataset/`: `cities.csv` (`city_a,city_b,km,quality`; quality is highway|good|fair|poor), `maze_doors.csv` (`room_a,room_b`), `maze_config.csv` (`key,value`: rooms, entrance, exit).
+- `seminar2/mcp_server.py`: 10 MCP tools: `list_cities`, `get_roads`, `shortest_route`, `best_quality_route`, `get_maze`, `get_doors`, `find_path`, plus `trace_route`, `trace_maze` (step-by-step explanation; `detail=True` returns full events) and `live_viewer` (page URL). `shortest_route`, `best_quality_route`, `find_path` and the trace tools publish their search to the viewer.
 - `seminar2/live/`: live viewer. `hub.py` (stdlib HTTP + SSE: `/`, `/events`, `/sessions`, `/sessions/latest`), `session.py` (session payloads), `index.html` (vanilla JS/SVG), `__main__.py` (standalone demo).
 - `seminar2/tui/`: stdlib-curses TUI. `actions.py` is the UI-free registry (`Action`, `Option`, validation, `ProcessManager` for subprocesses); `app.py` only renders. MCP tools are discovered from the server (`mcp._tool_manager`, private SDK API, with `FALLBACK_TOOLS`) and called in-process; scripts run as `sys.executable -m ...` subprocesses (captured, or detached with a temp log and stopped on exit). Add new scripts to the registry in `actions.py`.
 - `seminar2/images/{cities,maze}/`: generated figures and GIFs, one subdir per problem.
@@ -57,7 +57,7 @@ uv run python -m seminar2.tui                               # curses TUI: menu o
 ## Live viewer and Hermes
 
 - `mcp_server.py`'s `__main__` starts the viewer on http://127.0.0.1:8765 (`SEMINAR2_LIVE_PORT`; `SEMINAR2_LIVE=0` disables). If the default port is busy it falls back to a free port; an explicitly set busy port disables it. Importing `mcp_server` starts nothing.
-- Each search tool call (`shortest_route`, `find_path`, `trace_route`, `trace_maze`) auto-plays: phase 1 builds the graph edge by edge from the CSV, phase 2 animates the search. History is in memory (last 20 sessions).
+- Each search tool call (`shortest_route`, `best_quality_route`, `find_path`, `trace_route`, `trace_maze`) auto-plays: phase 1 builds the graph edge by edge from the CSV, phase 2 animates the search. History is in memory (last 20 sessions).
 - Hermes runs the server from `~/.hermes/config.yaml` `mcp_servers.seminar2` (`uv run --quiet --project <repo> python <repo>/seminar2/mcp_server.py`); tools appear as `mcp_seminar2_<tool>`. Restart Hermes after changing the server or dataset; check with `hermes mcp test seminar2`.
 
 ## Pitfalls

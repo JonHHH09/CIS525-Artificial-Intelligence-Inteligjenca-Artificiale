@@ -214,7 +214,7 @@ class Graph:
         """Trace of building this graph; see module-level build_steps."""
         return build_steps(self.adjacency, self.weighted)
 
-    def search_steps(self, start, goal):
+    def search_steps(self, start, goal, unit="km"):
         """Step events of Dijkstra (weighted) or BFS; unknown node -> one fail."""
         for name, node in (("start", start), ("goal", goal)):
             if node not in self.adjacency:
@@ -222,7 +222,7 @@ class Graph:
                              [], [], {}, {})
                 return
         if self.weighted:
-            yield from dijkstra_steps(self.edges, start, goal)
+            yield from dijkstra_steps(self.edges, start, goal, unit)
         else:
             yield from bfs_steps(self.edges, start, goal)
 

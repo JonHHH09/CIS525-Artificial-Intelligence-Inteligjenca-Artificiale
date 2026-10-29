@@ -2,7 +2,7 @@
 
 Undirected, weighted graph stored as an adjacency list.
 Weights are approximate driving distances in km.
-The roads live in seminar2/dataset/cities.csv and are read by load_graph().
+The roads live in seminar2/dataset/cities.csv and are read by load_graph(); load_roads() also returns the quality column.
 """
 
 import csv
@@ -11,6 +11,7 @@ from pathlib import Path
 from seminar2.graph_search import Graph
 
 DEFAULT_PATH = Path(__file__).resolve().parent.parent / "dataset" / "cities.csv"
+QUALITIES = ("highway", "good", "fair", "poor")  # best to worst
 
 
 def _is_blank(row):
@@ -63,6 +64,33 @@ def load_graph(path=DEFAULT_PATH):
     if not is_connected(g):
         raise ValueError("the road network is not connected")
     return g
+
+
+def load_roads(path=DEFAULT_PATH):
+    """Read the road quality: {city: {neighbour: quality}}, both directions.
+
+    Needs the 4th column `quality` (one of QUALITIES). The rest of the file is
+    validated by load_graph. Raises ValueError with path and line number.
+    """
+    load_graph(path)
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        if "quality" not in (reader.fieldnames or []):
+            raise ValueError(f"{path}: missing column(s) ['quality']")
+        rows = list(reader)
+
+    roads = {}
+    for line, row in enumerate(rows, start=2):
+        if _is_blank(row):
+            continue
+        a, b = row["city_a"].strip(), row["city_b"].strip()
+        quality = (row["quality"] or "").strip()
+        if quality not in QUALITIES:
+            raise ValueError(f"{path} line {line}: quality must be one of "
+                             f"{', '.join(QUALITIES)}, got {quality!r}")
+        roads.setdefault(a, {})[b] = quality
+        roads.setdefault(b, {})[a] = quality
+    return roads
 
 
 def is_symmetric(g):

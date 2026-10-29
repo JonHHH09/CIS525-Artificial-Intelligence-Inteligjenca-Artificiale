@@ -12,7 +12,8 @@ import urllib.request
 from pathlib import Path
 from unittest import mock
 
-from seminar2.cities.graph import load_graph
+from seminar2.cities.graph import load_graph, load_roads
+from seminar2.cities.quality import cost_adjacency
 from seminar2.live import hub
 from seminar2.live.session import city_session, maze_session
 from seminar2.maze.maze import load_maze
@@ -44,6 +45,13 @@ class SessionTests(unittest.TestCase):
         self.assertIn("Shkodër", s["title"])
         self.assertEqual(s["steps"][-1]["type"], "found")
         self.assertEqual(s["build"][-1]["edges"], 9)
+
+    def test_quality_session_messages_use_cost_not_km(self):
+        s = city_session(cost_adjacency(CITIES, load_roads()), "Shkodër", "Korçë",
+                         "best_quality_route", "cost")
+        self.assertEqual(s["result"]["unit"], "cost")
+        self.assertTrue(all("km" not in e["message"] for e in s["steps"]))
+        self.assertTrue(any(" km" in e["message"] for e in city()["steps"]))
 
     def test_maze_session(self):
         s = maze()
