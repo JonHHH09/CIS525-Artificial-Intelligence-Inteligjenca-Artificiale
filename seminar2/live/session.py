@@ -16,7 +16,7 @@ _ids = itertools.count(int(time.time() * 1000) * 1000)
 
 
 def _session(tool, problem, title, algorithm, graph, nodes, start, goal, unit):
-    build = list(graph.build_steps())
+    build = list(graph.build_steps(unit))
     steps = list(graph.search_steps(start, goal, unit))
     last = steps[-1]
     found = last["type"] == "found"

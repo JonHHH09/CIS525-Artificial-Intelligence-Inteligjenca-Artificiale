@@ -50,8 +50,12 @@ class SessionTests(unittest.TestCase):
         s = city_session(cost_adjacency(CITIES, load_roads()), "Shkodër", "Korçë",
                          "best_quality_route", "cost")
         self.assertEqual(s["result"]["unit"], "cost")
-        self.assertTrue(all("km" not in e["message"] for e in s["steps"]))
-        self.assertTrue(any(" km" in e["message"] for e in city()["steps"]))
+        self.assertTrue(all("km" not in e["message"] for e in s["build"] + s["steps"]))
+        self.assertTrue(any(e["type"] == "add_edge" and f"({e['cost']} cost)" in e["message"]
+                            for e in s["build"]))
+        km = city()
+        self.assertTrue(any(" km" in e["message"] for e in km["steps"]))
+        self.assertTrue(any(e["type"] == "add_edge" and " km)" in e["message"] for e in km["build"]))
 
     def test_maze_session(self):
         s = maze()

@@ -130,6 +130,13 @@ class BuildStepsTests(unittest.TestCase):
         self.assertEqual(sum(e["type"] == "add_edge" for e in events), 9)
         edge = next(e for e in events if e["type"] == "add_edge")
         self.assertEqual(edge["cost"], adj[edge["a"]][edge["b"]])
+        self.assertIn(f"({edge['cost']} km)", edge["message"])
+
+    def test_weighted_message_names_the_unit(self):
+        events = list(build_steps(WEIGHTED, True, unit="cost"))
+        edge = next(e for e in events if e["type"] == "add_edge")
+        self.assertIn(f"({edge['cost']} cost)", edge["message"])
+        self.assertNotIn("km", edge["message"])
 
     def test_real_maze(self):
         m = load_maze()

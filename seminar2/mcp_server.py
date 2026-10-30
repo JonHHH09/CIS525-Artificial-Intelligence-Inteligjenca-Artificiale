@@ -16,11 +16,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from mcp.server.mcpserver import MCPServer
 
 from seminar2.cities.graph import load_graph, load_roads
+from seminar2.cities.quality import best_quality_route as _quality_route
+from seminar2.cities.quality import cost_adjacency
 from seminar2.graph_search import Graph
 from seminar2.live import hub
 from seminar2.live.session import city_session, maze_session
 from seminar2.maze.maze import load_maze
-from seminar2.cities.quality import best_quality_route as _quality_route, cost_adjacency
 from seminar2.text import fold
 
 mcp = MCPServer("seminar2")
