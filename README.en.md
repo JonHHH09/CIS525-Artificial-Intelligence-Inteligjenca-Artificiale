@@ -44,7 +44,7 @@ seminar2/        Graph search (U1 cities, U2 maze)
   dataset/       CSV data
   images/        generated figures and animations
   tests/         tests (unittest)
-seminar3/        A* search (starter code)
+seminar3/        A* search (starter code, graph image)
 pyproject.toml   dependencies (uv)
 ```
 

@@ -44,7 +44,7 @@ seminar2/        Kërkimi në graf (U1 qytetet, U2 labirinti)
   dataset/       të dhënat CSV
   images/        figurat dhe animacionet e gjeneruara
   tests/         testet (unittest)
-seminar3/        Kërkimi A* (kodi fillestar)
+seminar3/        Kërkimi A* (kodi fillestar, figura e grafit)
 pyproject.toml   varësitë (uv)
 ```
 
