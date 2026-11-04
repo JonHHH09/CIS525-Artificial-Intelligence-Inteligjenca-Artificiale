@@ -5,7 +5,7 @@ Seminar exercises for the AI course (UET), one folder per seminar. Seminar 2 (do
 - **U1 cities**: 8 Albanian cities, weighted undirected graph (km), shortest route by Dijkstra, or the best-quality route (Dijkstra on km x road-quality factor).
 - **U2 maze**: 25 rooms on a 5x5 grid, unweighted undirected graph, fewest-doors path by BFS.
 
-Seminar 3 (in progress): A* search. `seminar3/` holds only the provided starter code `seminar_3_initial_code.py` for now.
+Seminar 3 (in progress): A* search. `seminar_3_initial_code.py` is the provided starter (`Node`, `a_star_search`, module-level `graph_data` A–G, heuristic `h = 0`). `draw.py` writes `seminar3/images/starter_graph.png` (`uv run python -m seminar3.draw`). `graph.py` converts the seminar 2 graphs to the A* shape `{node: [(neighbour, cost)]}`; tests in `seminar3/tests/` (also run in CI).
 
 ## Dev environment
 
