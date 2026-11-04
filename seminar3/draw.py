@@ -1,4 +1,4 @@
-"""Seminar 3: draw the A-G example graph from seminar_3_initial_code.py.
+"""Seminar 3: draw the cities graph from seminar_3_initial_code.py.
 
 Writes seminar3/images/starter_graph.png with the A* path highlighted.
 """
@@ -13,7 +13,7 @@ matplotlib.use("Agg")  # draw to files only, no window needed
 import matplotlib.pyplot as plt
 
 from seminar3.graph import path_cost
-from seminar3.seminar_3_initial_code import a_star_search, graph_data
+from seminar3.seminar_3_initial_code import GOAL, START, a_star_search, graph_data
 
 IMAGES = Path(__file__).resolve().parent / "images"  # seminar3/images/
 
@@ -21,6 +21,13 @@ NODE = "#8fbce6"  # nodes off the path
 PATH_NODE = "#d81b60"  # nodes on the A* path
 EDGE = "#555555"  # edges off the path
 LABEL = "#b00020"  # cost labels
+
+# Node positions copied from the State Space slide (pixels / 100, y flipped so up is up)
+CITY_POS = {
+    "LE": (5.6, -2.4), "SH": (7.9, -3.3), "TR": (3.8, -3.5), "EL": (5.4, -4.1),
+    "DR": (2.4, -4.5), "LU": (3.1, -6.0), "PR": (7.2, -5.5), "TP": (6.3, -6.5),
+    "GJ": (8.8, -6.6), "SR": (10.3, -7.7), "FR": (3.9, -8.0), "VL": (6.4, -8.4),
+}
 
 
 def layered_positions(graph, start):
@@ -65,7 +72,7 @@ def draw(graph, pos, path, title, out, unit=""):
                 "", xy=(x2, y2), xytext=(x1, y1),
                 arrowprops={
                     "arrowstyle": "-" if undirected else "-|>",  # arrow only for one-way edges
-                    "color": color, "lw": width, "shrinkA": 22, "shrinkB": 22, "mutation_scale": 20,
+                    "color": color, "lw": width, "shrinkA": 18, "shrinkB": 18, "mutation_scale": 20,
                 },
                 zorder=1,
             )
@@ -76,13 +83,13 @@ def draw(graph, pos, path, title, out, unit=""):
             )
 
     for node, (x, y) in pos.items():  # nodes on top of the edges
-        ax.scatter(x, y, s=2000, zorder=2, color=PATH_NODE if node in path else NODE, edgecolor="black")
+        ax.scatter(x, y, s=1300, zorder=2, clip_on=False, color=PATH_NODE if node in path else NODE, edgecolor="black")
         ax.text(x, y, str(node), ha="center", va="center", fontsize=9, fontweight="bold",
                 color="white" if node in path else "black", zorder=4)
 
-    ax.set_title(title)
+    ax.set_title(title, pad=20)
     ax.set_aspect("equal")
-    ax.margins(0.12)
+    ax.margins(0.08)
     ax.axis("off")
     fig.tight_layout()
     out.parent.mkdir(parents=True, exist_ok=True)  # create seminar3/images/ if missing
@@ -91,10 +98,10 @@ def draw(graph, pos, path, title, out, unit=""):
 
 
 def main():
-    path = a_star_search(graph_data, "A", "G")  # same search the starter's __main__ runs
+    path = a_star_search(graph_data, START, GOAL)  # same search the starter's __main__ runs
     out = IMAGES / "starter_graph.png"
-    draw(graph_data, layered_positions(graph_data, "A"), path,
-         f"Starter graph: A* path A -> G = {' -> '.join(path)} (cost {path_cost(graph_data, path)})", out)
+    draw(graph_data, CITY_POS, path,
+         f"Cities graph: A* path {START} -> {GOAL} = {' -> '.join(path)} (cost {path_cost(graph_data, path)})", out)
     print(f"saved {out}")
 
 
