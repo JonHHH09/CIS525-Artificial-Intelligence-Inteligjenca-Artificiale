@@ -143,11 +143,13 @@ def bfs(edges, start, goal):
     return None
 
 
-def build_steps(adjacency, weighted):
+def build_steps(adjacency, weighted, unit="km"):
     """Trace reading an adjacency mapping into a graph, in insertion order.
 
-    Yields add_node (node) and add_edge (a, b, cost; km if weighted else 1) once
-    per undirected edge; every event carries the nodes and edges counts so far.
+    Yields add_node (node) and add_edge (a, b, cost) once per undirected edge.
+    Weighted costs are copied from the adjacency; unweighted edges cost 1.
+    A weighted add_edge message names `unit` ("km", "cost", ...). Every event
+    carries the nodes and edges counts so far.
     """
     seen_nodes = []
     seen_edges = set()
@@ -171,7 +173,7 @@ def build_steps(adjacency, weighted):
             seen_edges.add(key)
             count["edges"] += 1
             if weighted:
-                message = f"Read road {a}–{b} ({cost} km); store it in both directions."
+                message = f"Read road {a}–{b} ({cost} {unit}); store it in both directions."
             else:
                 message = f"Read door {a}–{b}; rooms {a} and {b} become neighbours."
             yield {"type": "add_edge", "message": message, "a": a, "b": b,
@@ -210,11 +212,11 @@ class Graph:
         path = bfs(self.edges, start, goal)
         return (path, len(path) - 1) if path else (None, None)
 
-    def build_steps(self):
+    def build_steps(self, unit="km"):
         """Trace of building this graph; see module-level build_steps."""
-        return build_steps(self.adjacency, self.weighted)
+        return build_steps(self.adjacency, self.weighted, unit)
 
-    def search_steps(self, start, goal):
+    def search_steps(self, start, goal, unit="km"):
         """Step events of Dijkstra (weighted) or BFS; unknown node -> one fail."""
         for name, node in (("start", start), ("goal", goal)):
             if node not in self.adjacency:
@@ -222,7 +224,7 @@ class Graph:
                              [], [], {}, {})
                 return
         if self.weighted:
-            yield from dijkstra_steps(self.edges, start, goal)
+            yield from dijkstra_steps(self.edges, start, goal, unit)
         else:
             yield from bfs_steps(self.edges, start, goal)
 

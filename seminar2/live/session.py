@@ -16,8 +16,8 @@ _ids = itertools.count(int(time.time() * 1000) * 1000)
 
 
 def _session(tool, problem, title, algorithm, graph, nodes, start, goal, unit):
-    build = list(graph.build_steps())
-    steps = list(graph.search_steps(start, goal))
+    build = list(graph.build_steps(unit))
+    steps = list(graph.search_steps(start, goal, unit))
     last = steps[-1]
     found = last["type"] == "found"
     return {
@@ -35,13 +35,13 @@ def _session(tool, problem, title, algorithm, graph, nodes, start, goal, unit):
     }
 
 
-def city_session(adjacency, start, goal, tool):
-    """Dijkstra session over the cities graph."""
+def city_session(adjacency, start, goal, tool, unit="km"):
+    """Dijkstra session over the cities graph (unit "cost" for quality-weighted edges)."""
     nodes = [{"id": str(c), "label": str(c), "x": CITY_POS[c][0], "y": CITY_POS[c][1],
               "role": "start" if c == start else "goal" if c == goal else "normal"}
              for c in adjacency]
     return _session(tool, "cities", f"{tool}: {start} → {goal} (Dijkstra)", "Dijkstra",
-                    Graph(adjacency, weighted=True), nodes, start, goal, "km")
+                    Graph(adjacency, weighted=True), nodes, start, goal, unit)
 
 
 def maze_session(adjacency, start, goal, entrance, exit_, tool):

@@ -152,7 +152,7 @@ function load(session, autoplay) {
     const line = svg("line", { x1: pa[0], y1: pa[1], x2: pb[0], y2: pb[1], class: "edge" });
     eg.append(line); S.el.edges[k] = line;
     if (session.weighted) {
-      const l = svg("text", { x: (pa[0] + pb[0]) / 2, y: (pa[1] + pb[1]) / 2 - 6, class: "elabel" }, ev.cost + " km");
+      const l = svg("text", { x: (pa[0] + pb[0]) / 2, y: (pa[1] + pb[1]) / 2 - 6, class: "elabel" }, ev.cost + " " + ((S.cur.result && S.cur.result.unit) || "km"));
       lg.append(l); S.el.labels[k] = l;
     }
   }

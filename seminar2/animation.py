@@ -75,7 +75,7 @@ def build_frames(scene, hold=0):
     graph = Graph(scene.adjacency, scene.weighted)
     frames = []
     nodes, edges = [], []
-    for ev in graph.build_steps():
+    for ev in graph.build_steps(scene.unit):
         if ev["type"] == "add_node":
             nodes = nodes + [ev["node"]]
         else:

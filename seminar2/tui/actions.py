@@ -269,8 +269,8 @@ def _tool_action(name, fn, doc):
     return Action(name, G_MCP, name, "\n\n".join(paragraphs), options, run)
 
 
-FALLBACK_TOOLS = ("list_cities", "get_roads", "shortest_route", "trace_route", "get_maze",
-                  "get_doors", "find_path", "trace_maze", "live_viewer")
+FALLBACK_TOOLS = ("list_cities", "get_roads", "shortest_route", "best_quality_route",
+                  "trace_route", "get_maze", "get_doors", "find_path", "trace_maze", "live_viewer")
 
 
 def discover_tools():
@@ -306,7 +306,7 @@ def _start_viewer(values):
         if url is None:
             return Result(f"Could not start the live viewer (port busy or invalid?)\n{err.getvalue().strip()}", False)
         lines.append(f"Live viewer started: {url}")
-    lines.append("MCP-tool actions (shortest_route, find_path, trace_*) now publish to it.")
+    lines.append("MCP-tool actions (shortest_route, best_quality_route, find_path, trace_*) now publish to it.")
     if values.get("open_browser"):
         lines.append("Opening it in the browser." if open_browser(url) else "Could not open a browser; open the URL by hand.")
     return Result("\n".join(lines), True, url)

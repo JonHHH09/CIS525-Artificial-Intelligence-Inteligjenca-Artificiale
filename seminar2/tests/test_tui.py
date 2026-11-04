@@ -24,7 +24,7 @@ def run(key, **values):
 class RegistryTests(unittest.TestCase):
     def test_every_mcp_tool_has_an_action(self):
         tools = {t.name for t in srv.mcp._tool_manager.list_tools()}
-        self.assertEqual(len(tools), 9)
+        self.assertEqual(len(tools), 10)
         self.assertEqual({a.key for a in registry() if a.group == actions.G_MCP}, tools)
 
     def test_fallback_list_matches_server(self):
