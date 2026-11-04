@@ -17,9 +17,10 @@ env/
 .coverage
 htmlcov/
 
-# IDE
+# IDE and local agent state
 .idea/
 .vscode/
+.grok/
 
 # OS
 .DS_Store
