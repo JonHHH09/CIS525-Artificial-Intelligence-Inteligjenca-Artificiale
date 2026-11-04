@@ -1,13 +1,15 @@
-# AI_COURSE_UET
+# Artificial Intelligence / Inteligjenca Artificiale (CIS525)
 
-Seminar 2 exercises for the AI course (UET). Two graph problems share one search module and are exposed through an MCP server:
+Seminar exercises for the AI course (UET), one folder per seminar. Seminar 2 (done): two graph problems share one search module and are exposed through an MCP server:
 
 - **U1 cities**: 8 Albanian cities, weighted undirected graph (km), shortest route by Dijkstra, or the best-quality route (Dijkstra on km x road-quality factor).
 - **U2 maze**: 25 rooms on a 5x5 grid, unweighted undirected graph, fewest-doors path by BFS.
 
+Seminar 3 (in progress): A* search. `seminar3/` holds only the provided starter code `seminar_3_initial_code.py` for now.
+
 ## Dev environment
 
-- Python >=3.14, managed with `uv` (`package = false`, so nothing is installed as a package). Deps: `matplotlib`, `mcp`.
+- Python >=3.14, managed with `uv` (`package = false`, so nothing is installed as a package). Deps: `matplotlib`, `mcp`, `textual`, `rich`.
 - Setup: `uv sync`
 - Run everything from the repo root. Imports are absolute (`from seminar2.graph_search import Graph`).
 
@@ -24,13 +26,15 @@ uv run python -m seminar2.maze.maze                         # prints maze + vali
 uv run python seminar2/mcp_server.py                        # MCP server over stdio + live viewer
 uv run python -m seminar2.live [--port N] [--no-browser]    # live viewer alone, with two demo sessions
 npx @modelcontextprotocol/inspector uv run python seminar2/mcp_server.py   # call tools by hand
-uv run python -m seminar2.tui                               # curses TUI: menu of every feature, run with options
+uv run python -m seminar2.tui                               # Textual TUI: menu of every feature, run with options
+uvx ruff@0.17.3 check .                                     # lint (config in pyproject.toml)
 ```
 
-`--show` opens a matplotlib window instead of saving the GIF. No linter, formatter, type checker or CI is configured. Don't invent commands for them.
+`--show` opens a matplotlib window instead of saving the GIF. CI (`.github/workflows/ci.yml`) runs ruff and the tests on Ubuntu and Windows. No formatter or type checker is configured; don't invent commands for them.
 
 ## Layout
 
+- `README.md` (Albanian) and `README.en.md` (English): course index for the instructor. Each seminar folder has its own `README.md` + `README.en.md` with the results, commands and tool tables. Keep both languages in step, with the same sections.
 - `seminar2/graph_search.py`: pure stdlib search. `dijkstra_steps`, `bfs_steps`, `build_steps` yield one dict per step (`type`, `message`, `frontier`, `visited`, `dist`, `prev`); `dijkstra`/`bfs` consume them, so traces and results can't drift. `Graph(adjacency, weighted)` adds `shortest_path`, `search_steps`, `build_steps`. Keep it free of MCP/CSV/dataset/matplotlib imports.
 - `seminar2/text.py`: `fold` (case/accent-insensitive key) and `plural`.
 - `seminar2/layout.py`: node positions (`CITY_POS`, `maze_position`) shared by draw, animate and the viewer.
@@ -39,7 +43,7 @@ uv run python -m seminar2.tui                               # curses TUI: menu o
 - `seminar2/dataset/`: `cities.csv` (`city_a,city_b,km,quality`; quality is highway|good|fair|poor), `maze_doors.csv` (`room_a,room_b`), `maze_config.csv` (`key,value`: rooms, entrance, exit).
 - `seminar2/mcp_server.py`: 10 MCP tools: `list_cities`, `get_roads`, `shortest_route`, `best_quality_route`, `get_maze`, `get_doors`, `find_path`, plus `trace_route`, `trace_maze` (step-by-step explanation; `detail=True` returns full events) and `live_viewer` (page URL). `shortest_route`, `best_quality_route`, `find_path` and the trace tools publish their search to the viewer.
 - `seminar2/live/`: live viewer. `hub.py` (stdlib HTTP + SSE: `/`, `/events`, `/sessions`, `/sessions/latest`), `session.py` (session payloads), `index.html` (vanilla JS/SVG), `__main__.py` (standalone demo).
-- `seminar2/tui/`: stdlib-curses TUI. `actions.py` is the UI-free registry (`Action`, `Option`, validation, `ProcessManager` for subprocesses); `app.py` only renders. MCP tools are discovered from the server (`mcp._tool_manager`, private SDK API, with `FALLBACK_TOOLS`) and called in-process; scripts run as `sys.executable -m ...` subprocesses (captured, or detached with a temp log and stopped on exit). Add new scripts to the registry in `actions.py`.
+- `seminar2/tui/`: Textual TUI. `actions.py` is the UI-free registry (`Action`, `Option`, validation, `ProcessManager` for subprocesses); `app.py` only renders. MCP tools are discovered from the server (`mcp._tool_manager`, private SDK API, with `FALLBACK_TOOLS`) and called in-process; scripts run as `sys.executable -m ...` subprocesses (captured, or detached with a temp log and stopped on exit). Add new scripts to the registry in `actions.py`.
 - `seminar2/images/{cities,maze}/`: generated figures and GIFs, one subdir per problem.
 - `seminar2/*/arsyetimi.md`: the written reports (Albanian).
 
@@ -69,4 +73,5 @@ uv run python -m seminar2.tui                               # curses TUI: menu o
 - `arsyetimi.md` quotes counts (9 roads, 31 doors, 8 cities, 25 rooms). Update them when the CSVs change.
 - Changing the dataset can change which equal-length path is returned. The tests pin the real-data results (Shkodër→Korçë 267 km; maze 1→25 in 12 doors).
 - `test_live.py` and `test_mcp_server.py` start and stop the hub on port 0; don't run them in a process that hosts a real hub.
-- `git` has no commits yet and everything is untracked.
+- The READMEs quote results, counts and the MCP tool list. Update them in both languages when the data, results or tools change.
+- Branches: feature branch → PR into `development`; `development` → `main` through a release PR.

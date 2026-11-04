@@ -1,7 +1,7 @@
 [project]
-name = "ai-course-uet"
+name = "cis525-artificial-intelligence"
 version = "0.1.0"
-description = "AI course (UET) seminar exercises"
+description = "Artificial Intelligence / Inteligjenca Artificiale (CIS525): seminar exercises"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
