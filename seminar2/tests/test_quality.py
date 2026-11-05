@@ -41,6 +41,10 @@ class LoaderTests(unittest.TestCase):
     def test_bad_quality_names_file_and_line(self):
         self.check_error(HEADER + "A,B,10,good\nB,C,5,bumpy\n", "line 3", "bumpy")
 
+    def test_bad_quality_line_counts_blank_lines(self):
+        # csv skips the blank line, but the error must still name the physical line 4
+        self.check_error(HEADER + "A,B,10,good\n\nB,C,5,bumpy\n", "line 4", "bumpy")
+
     def test_empty_quality_is_an_error(self):
         self.check_error(HEADER + "A,B,10,\n", "line 2")
 

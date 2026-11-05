@@ -35,7 +35,7 @@ from seminar2.text import fold
 ROOT = Path(__file__).resolve().parent.parent.parent
 
 G_MCP, G_LIVE, G_ANIM = "MCP tools", "Live viewer", "Animations"
-G_DATA, G_DEV = "Figures & data", "Dev & tools"
+G_DATA, G_S3, G_DEV = "Figures & data", "Seminar 3: A*", "Dev & tools"
 
 # MCP tool parameters that get dataset-aware choices.
 CITY_PARAMS = {"city": "Shkodër", "from_city": "Shkodër", "to_city": "Korçë"}
@@ -749,6 +749,17 @@ def registry():
         Action("maze_check", G_DATA, "Maze check",
                "Print the maze with its validation result (python -m seminar2.maze.maze).", (),
                (lambda v: _module("seminar2.maze.maze", title="maze check"))),
+        Action("s3_starter", G_S3, "A* starter",
+               "Run the provided A* starter on the cities state space and print the path from TR to GJ "
+               "(python -m seminar3.seminar_3_initial_code).", (),
+               (lambda v: _module("seminar3.seminar_3_initial_code", title="seminar 3 A* starter"))),
+        Action("s3_draw", G_S3, "A* graph draw",
+               "Write seminar3/images/starter_graph.png: the cities graph with the A* path highlighted.", (),
+               (lambda v: _module("seminar3.draw", title="seminar 3 draw"))),
+        Action("s3_graph", G_S3, "A* on Seminar 2 graphs",
+               "Convert the Seminar 2 cities and maze graphs to the A* shape and run A* on them "
+               "(python -m seminar3.graph).", (),
+               (lambda v: _module("seminar3.graph", title="seminar 3 graphs"))),
         Action("run_tests", G_DEV, "Run tests",
                "Run the unittest suite: python -m unittest discover -s seminar2/tests -t .", (),
                (lambda v: _module("unittest", "discover", "-s", "seminar2/tests", "-t", ".", title="run tests"))),
