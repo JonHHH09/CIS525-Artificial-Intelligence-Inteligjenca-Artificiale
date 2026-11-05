@@ -73,22 +73,32 @@ def a_star_search(graph, start, end):
     return None  # Path not found
 
 
-# Define a simple graph (module level so seminar3/draw.py can draw it)
+# State space of the cities (module level so seminar3/draw.py can draw it).
+# Roads are two-way, so every edge is stored in both directions.
+# The FR-TP road has no cost in the slide; 83 is the Fier-Tepelenë road distance in km.
 graph_data = {
-    'A': [('B', 1), ('C', 3)],
-    'B': [('D', 2), ('E', 5)],
-    'C': [('F', 4)],
-    'D': [('G', 1)],
-    'E': [('G', 2)],
-    'F': [],
-    'G': []
+    'LE': [('TR', 55), ('SH', 35)],
+    'SH': [('LE', 35)],
+    'TR': [('LE', 55), ('DR', 40), ('EL', 35)],
+    'DR': [('TR', 40), ('LU', 40)],
+    'EL': [('TR', 35), ('LU', 45)],
+    'LU': [('DR', 40), ('EL', 45), ('FR', 80)],
+    'FR': [('LU', 80), ('VL', 35), ('TP', 83)],
+    'VL': [('FR', 35), ('TP', 60), ('SR', 125)],
+    'TP': [('PR', 30), ('GJ', 35), ('VL', 60), ('FR', 83)],
+    'PR': [('TP', 30), ('GJ', 30)],
+    'GJ': [('PR', 30), ('TP', 35), ('SR', 55)],
+    'SR': [('GJ', 55), ('VL', 125)],
 }
+
+START = 'TR'  # black node in the slide
+GOAL = 'GJ'  # red node in the slide
 
 
 # Example Usage:
 if __name__ == "__main__":
-    start_node_name = 'A'
-    end_node_name = 'G'
+    start_node_name = START # the starting node
+    end_node_name = GOAL
 
     path_found = a_star_search(graph_data, start_node_name, end_node_name)
 
