@@ -77,10 +77,10 @@ def load_roads(path=DEFAULT_PATH):
         reader = csv.DictReader(f)
         if "quality" not in (reader.fieldnames or []):
             raise ValueError(f"{path}: missing column(s) ['quality']")
-        rows = list(reader)
+        rows = [(reader.line_num, row) for row in reader]   # csv skips blank lines, so enumerate would drift
 
     roads = {}
-    for line, row in enumerate(rows, start=2):
+    for line, row in rows:
         if _is_blank(row):
             continue
         a, b = row["city_a"].strip(), row["city_b"].strip()

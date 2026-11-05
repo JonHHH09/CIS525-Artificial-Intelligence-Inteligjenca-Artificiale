@@ -73,3 +73,5 @@ uv run python -m seminar3.draw                             # writes images/start
 uv run python -m seminar3.graph                            # A* on the Seminar 2 cities and maze graphs
 uv run python -m unittest discover -s seminar3/tests -t .  # tests
 ```
+
+The first three are also in the terminal UI (`uv run python -m seminar2.tui`), under **Seminar 3: A\***.

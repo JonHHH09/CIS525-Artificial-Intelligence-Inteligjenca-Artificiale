@@ -73,3 +73,5 @@ uv run python -m seminar3.draw                             # shkruan images/star
 uv run python -m seminar3.graph                            # A* mbi grafet e qyteteve dhe labirintit nga Seminari 2
 uv run python -m unittest discover -s seminar3/tests -t .  # testet
 ```
+
+Tri të parat janë edhe në ndërfaqen e terminalit (`uv run python -m seminar2.tui`), te **Seminar 3: A\***.

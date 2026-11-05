@@ -36,7 +36,7 @@ class RegistryTests(unittest.TestCase):
         keys = {a.key for a in registry()}
         self.assertTrue({"live_start", "live_stop", "live_open", "cities_animate", "maze_animate",
                          "cities_draw", "maze_draw", "cities_check", "maze_check", "run_tests",
-                         "hermes_check", "inspector", "demo_viewer"} <= keys)
+                         "hermes_check", "inspector", "demo_viewer", "s3_starter", "s3_draw", "s3_graph"} <= keys)
         self.assertEqual(len(keys), len(registry()))
 
     def test_tool_forms_follow_signatures(self):
@@ -136,6 +136,9 @@ class SpawnTests(unittest.TestCase):
             "maze_draw": ["-m", "seminar2.maze.draw"],
             "cities_check": ["-m", "seminar2.cities.graph"],
             "maze_check": ["-m", "seminar2.maze.maze"],
+            "s3_starter": ["-m", "seminar3.seminar_3_initial_code"],
+            "s3_draw": ["-m", "seminar3.draw"],
+            "s3_graph": ["-m", "seminar3.graph"],
             "run_tests": ["-m", "unittest", "discover", "-s", "seminar2/tests", "-t", "."],
         }
         for key, args in expect.items():
