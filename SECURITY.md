@@ -11,13 +11,9 @@ This is a course project with no versioned releases. Only the latest code on the
 
 ## Scope
 
-The project is meant to run on your own machine:
+The project consists of local Jupyter notebooks with algorithms, inline figures and notebook controls, plus course datasets in `data/`. The `models/` directory is reserved for future trained model artifacts. It does not run an MCP server, a separate web viewer or a terminal application.
 
-- The MCP server talks over stdio.
-- The live viewer listens on `127.0.0.1` only and has no authentication.
-- The TUI starts local subprocesses.
-
-Reports are most useful when they concern the code in this repository, for example path handling in the CSV loaders, the viewer's HTTP endpoints, or the subprocess handling in the TUI. Vulnerabilities in Python, `uv`, `mcp`, `matplotlib` or Textual themselves should go to those projects.
+Reports are most useful when they concern code in these notebooks, such as input validation or unintended file access. Vulnerabilities in Python, `uv`, Jupyter, ipywidgets, pandas or matplotlib themselves should go to those projects.
 
 ## Reporting a Vulnerability
 

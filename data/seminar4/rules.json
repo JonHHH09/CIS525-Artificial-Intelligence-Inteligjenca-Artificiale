@@ -1,0 +1,160 @@
+[
+  {
+    "id": "R01",
+    "kushtet": [
+      "Motori nuk rrotullohet gjatë ndezjes",
+      "Dritat dobësohen ose fiken gjatë ndezjes"
+    ],
+    "perfundimet": [
+      "Ka shenja të furnizimit të dobët elektrik"
+    ],
+    "lloji": "ndermjetem",
+    "shpjegimi": "Mosrrotullimi i motorit dhe dobësimi i dritave përputhen me furnizim të dobët elektrik."
+  },
+  {
+    "id": "R02",
+    "kushtet": [
+      "Motori rrotullohet ngadalë gjatë ndezjes",
+      "Dritat dobësohen ose fiken gjatë ndezjes"
+    ],
+    "perfundimet": [
+      "Ka shenja të furnizimit të dobët elektrik"
+    ],
+    "lloji": "ndermjetem",
+    "shpjegimi": "Rrotullimi i ngadaltë dhe dritat e dobëta përputhen me furnizim të dobët elektrik."
+  },
+  {
+    "id": "R03",
+    "kushtet": [
+      "Ka shenja të furnizimit të dobët elektrik"
+    ],
+    "perfundimet": [
+      "Dyshohet bateri e dobët ose lidhje elektrike e lirshme"
+    ],
+    "lloji": "problem",
+    "shpjegimi": "Këto shenja sugjerojnë kontroll të baterisë dhe lidhjeve; nuk përcaktojnë vetë pjesën e dëmtuar."
+  },
+  {
+    "id": "R04",
+    "kushtet": [
+      "Dyshohet bateri e dobët ose lidhje elektrike e lirshme"
+    ],
+    "perfundimet": [
+      "Kërko kontroll të baterisë dhe të lidhjeve elektrike në servis."
+    ],
+    "lloji": "keshille",
+    "shpjegimi": "Kontrolli i baterisë dhe i lidhjeve ndihmon në dallimin e shkaqeve të mundshme."
+  },
+  {
+    "id": "R05",
+    "kushtet": [
+      "Motori nuk rrotullohet gjatë ndezjes",
+      "Dritat ruajnë ndriçimin normal gjatë ndezjes"
+    ],
+    "perfundimet": [
+      "Dyshohet problem në qarkun e ndezjes ose te motorinoja"
+    ],
+    "lloji": "problem",
+    "shpjegimi": "Kur dritat duken normale por motori nuk rrotullohet, duhet kontrolluar sistemi i ndezjes; ky vlerësim nuk përjashton shkaqe të tjera."
+  },
+  {
+    "id": "R06",
+    "kushtet": [
+      "Dyshohet problem në qarkun e ndezjes ose te motorinoja"
+    ],
+    "perfundimet": [
+      "Kërko kontroll të qarkut të ndezjes dhe të motorinos në servis."
+    ],
+    "lloji": "keshille",
+    "shpjegimi": "Një kontroll teknik nevojitet për të përcaktuar shkakun e mosrrotullimit."
+  },
+  {
+    "id": "R07",
+    "kushtet": [
+      "Motori rrotullohet normalisht por nuk ndizet",
+      "Treguesi i karburantit është bosh ose pothuajse bosh"
+    ],
+    "perfundimet": [
+      "Dyshohet mungesë karburanti"
+    ],
+    "lloji": "problem",
+    "shpjegimi": "Motori që rrotullohet pa u ndezur dhe treguesi pranë boshit sugjerojnë mungesë karburanti."
+  },
+  {
+    "id": "R08",
+    "kushtet": [
+      "Dyshohet mungesë karburanti"
+    ],
+    "perfundimet": [
+      "Verifiko nivelin real të karburantit dhe kërko asistencë nëse makina përsëri nuk ndizet."
+    ],
+    "lloji": "keshille",
+    "shpjegimi": "Treguesi i karburantit është një e dhënë, jo provë përfundimtare e shkakut."
+  },
+  {
+    "id": "R09",
+    "kushtet": [
+      "Temperatura e motorit është mbi normalen"
+    ],
+    "perfundimet": [
+      "Ka shenja mbinxehjeje të motorit"
+    ],
+    "lloji": "problem",
+    "shpjegimi": "Temperatura mbi normalen është shenjë mbinxehjeje, por nuk tregon shkakun e saj."
+  },
+  {
+    "id": "R10",
+    "kushtet": [
+      "Ka shenja mbinxehjeje të motorit"
+    ],
+    "perfundimet": [
+      "Ndalo në një vend të sigurt, fik motorin dhe kërko asistencë. Mos hap kapakun e sistemit të ftohjes kur motori është i nxehtë."
+    ],
+    "lloji": "keshille",
+    "shpjegimi": "Motori i mbinxehur dhe sistemi i ftohjes kërkojnë trajtim të kujdesshëm."
+  },
+  {
+    "id": "R11",
+    "kushtet": [
+      "Një gomë është dukshëm e shfryrë"
+    ],
+    "perfundimet": [
+      "Goma e shfryrë kërkon kontroll"
+    ],
+    "lloji": "problem",
+    "shpjegimi": "Një gomë dukshëm e shfryrë është problem i vëzhgueshëm; vetëm pamja nuk provon shpim nga gozhda."
+  },
+  {
+    "id": "R12",
+    "kushtet": [
+      "Goma e shfryrë kërkon kontroll"
+    ],
+    "perfundimet": [
+      "Mos vazhdo udhëtimin me gomën e shfryrë; ndalo në një vend të sigurt dhe kërko asistencë."
+    ],
+    "lloji": "keshille",
+    "shpjegimi": "Goma duhet kontrolluar para vazhdimit të udhëtimit."
+  },
+  {
+    "id": "R13",
+    "kushtet": [
+      "Një gomë humbet presion vazhdimisht"
+    ],
+    "perfundimet": [
+      "Dyshohet rrjedhje ajri nga goma ose valvula"
+    ],
+    "lloji": "problem",
+    "shpjegimi": "Humbja e përsëritur e presionit sugjeron rrjedhje; burimi përcaktohet me kontroll."
+  },
+  {
+    "id": "R14",
+    "kushtet": [
+      "Dyshohet rrjedhje ajri nga goma ose valvula"
+    ],
+    "perfundimet": [
+      "Kërko kontroll të gomës dhe të valvulës te një specialist i gomave."
+    ],
+    "lloji": "keshille",
+    "shpjegimi": "Kontrolli dallon rrjedhjen në gomë, valvul ose lidhjen me diskun."
+  }
+]
