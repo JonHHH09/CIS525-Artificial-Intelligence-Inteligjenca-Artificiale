@@ -1,0 +1,104 @@
+[
+  {
+    "id": "ndezja",
+    "pyetja": "Çfarë ndodh kur përpiqeni të ndizni makinën?",
+    "alternativat": [
+      {
+        "teksti": "Motori nuk rrotullohet fare.",
+        "fakti": "Motori nuk rrotullohet gjatë ndezjes"
+      },
+      {
+        "teksti": "Motori rrotullohet ngadalë dhe ndizet me vështirësi.",
+        "fakti": "Motori rrotullohet ngadalë gjatë ndezjes"
+      },
+      {
+        "teksti": "Motori rrotullohet normalisht, por makina nuk ndizet.",
+        "fakti": "Motori rrotullohet normalisht por nuk ndizet"
+      },
+      {
+        "teksti": "Makina ndizet dhe motori punon.",
+        "fakti": "Makina ndizet dhe motori punon"
+      },
+      {
+        "teksti": "Nuk e di.",
+        "fakti": null
+      }
+    ]
+  },
+  {
+    "id": "dritat",
+    "pyetja": "Si duken dritat gjatë përpjekjes për ndezje?",
+    "alternativat": [
+      {
+        "teksti": "Dobësohen dukshëm ose fiken.",
+        "fakti": "Dritat dobësohen ose fiken gjatë ndezjes"
+      },
+      {
+        "teksti": "Ruajnë ndriçimin normal.",
+        "fakti": "Dritat ruajnë ndriçimin normal gjatë ndezjes"
+      },
+      {
+        "teksti": "Nuk e di.",
+        "fakti": null
+      }
+    ]
+  },
+  {
+    "id": "karburanti",
+    "pyetja": "Çfarë tregon treguesi i karburantit?",
+    "alternativat": [
+      {
+        "teksti": "Bosh ose pothuajse bosh.",
+        "fakti": "Treguesi i karburantit është bosh ose pothuajse bosh"
+      },
+      {
+        "teksti": "Ka karburant të mjaftueshëm sipas treguesit.",
+        "fakti": "Treguesi tregon karburant të mjaftueshëm"
+      },
+      {
+        "teksti": "Nuk e di.",
+        "fakti": null
+      }
+    ]
+  },
+  {
+    "id": "temperatura",
+    "pyetja": "Çfarë tregon temperatura e motorit?",
+    "alternativat": [
+      {
+        "teksti": "Është mbi normalen ose në zonën e kuqe.",
+        "fakti": "Temperatura e motorit është mbi normalen"
+      },
+      {
+        "teksti": "Është brenda normales.",
+        "fakti": "Temperatura e motorit është normale"
+      },
+      {
+        "teksti": "Nuk e di.",
+        "fakti": null
+      }
+    ]
+  },
+  {
+    "id": "gomat",
+    "pyetja": "Çfarë vini re te gomat?",
+    "alternativat": [
+      {
+        "teksti": "Një gomë është dukshëm e shfryrë.",
+        "fakti": "Një gomë është dukshëm e shfryrë"
+      },
+      {
+        "teksti": "Një gomë humbet presion vazhdimisht pas fryrjes.",
+        "fakti": "Një gomë humbet presion vazhdimisht"
+      },
+      {
+        "teksti": "Nuk vërej gomë të shfryrë ose humbje presioni.",
+        "fakti": "Nuk vërehet problem me presionin e gomave"
+      },
+      {
+        "teksti": "Nuk e di.",
+        "fakti": null
+      }
+    ]
+  }
+]
