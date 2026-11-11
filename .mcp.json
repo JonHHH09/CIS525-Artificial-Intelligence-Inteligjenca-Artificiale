@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "seminar2": {
-      "command": "uv",
-      "args": ["run", "--quiet", "python", "seminar2/mcp_server.py"]
-    }
-  }
-}
