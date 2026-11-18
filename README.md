@@ -11,6 +11,7 @@ Ushtrimet e CIS525 në UET janë realizuar si Jupyter notebooks në dosjen `note
 | [Seminari 2](notebooks/seminar2.ipynb) | Dijkstra, cilësia e rrugës, BFS, labirinti, gjurmët dhe figurat | Ushtrimet ekzistuese |
 | [Seminari 3](notebooks/seminar3.ipynb) | Starter-i A*, heuristika zero dhe krahasimi me Dijkstra/BFS | Detyra në punë |
 | [Seminari 4](notebooks/seminar4.ipynb) | Sistemet e prodhimit, inferenca përpara dhe pyetësori me pesë pyetje për makinën | Ushtrim ndërveprues; detyra në punë |
+| [Seminari 5](notebooks/seminar5.ipynb) | Agjent refleks që blen, shet ose pret në një bursë të simuluar | Çmime të sajuara ose kuota nga Yahoo Finance |
 
 ## Ekzekutimi
 
@@ -25,9 +26,11 @@ Hap një seminar dhe zgjidh **Restart Kernel and Run All Cells**. Në PyCharm p�
 
 Në Seminarin 4 plotëso pesë pyetjet te **Çfarë problemi ka makina juaj?**, pastaj shtyp **Vlerëso përgjigjet**. Çdo pyetje përfshin **Nuk e di**. Formulari shfaq problemet e mundshme, këshillat dhe rregullat që i mbështesin; kur përgjigjet nuk përputhen me rregullat, shfaqet qartë se nuk u gjet gjendje e njohur. **Fillo nga e para** pastron formularin. Run All përfundon pa pritur hyrje nga tastiera.
 
+Për të provuar Seminarin 5 me kuota të bursës, ekzekuto qelizat me kernelin e projektit dhe kliko **Nis përditësimin**. `uv sync --locked` instalon edhe `yfinance`. Notebook-u kontrollon kuotën më të fundit të Yahoo Finance afërsisht çdo 10 sekonda dhe përditëson grafikun dhe portofolin e simuluar kur vjen një kuotë e re. Kuotat mund të vonohen. Shembulli me çmime të sajuara funksionon edhe pa internet.
+
 ## Struktura
 
-Tre notebook-et e seminareve ndodhen në dosjen `notebooks/`. Ky udhëzues, `pyproject.toml` dhe `uv.lock` mbeten në rrënjë. Algoritmet ndryshohen brenda qelizave; të dhënat ndryshohen në këta skedarë:
+Notebook-et e seminareve ndodhen në dosjen `notebooks/`. Ky udhëzues, `pyproject.toml` dhe `uv.lock` mbeten në rrënjë. Algoritmet ndryshohen brenda qelizave; skedarët e të dhënave ndodhen në këto dosje:
 
 | Dosja | Përmbajtja | Përdoret nga |
 |---|---|---|
@@ -40,10 +43,10 @@ Tre notebook-et e seminareve ndodhen në dosjen `notebooks/`. Ky udhëzues, `pyp
 
 ## Kontrolli i seminareve
 
-Çdo seminar përmban kontrolle `assert` për rezultatet. Ekzekuto të gjitha qelizat e një seminari, ose kontrollo të tre nga terminali:
+Çdo seminar përmban kontrolle `assert` për rezultatet. Ekzekuto të gjitha qelizat e një seminari, ose kontrolloji të gjithë nga terminali:
 
 ```text
-uv run jupyter nbconvert --execute --to notebook --ExecutePreprocessor.timeout=180 --output-dir .notebook-checks notebooks/seminar2.ipynb notebooks/seminar3.ipynb notebooks/seminar4.ipynb
+uv run jupyter nbconvert --execute --to notebook --ExecutePreprocessor.timeout=180 --output-dir .notebook-checks notebooks/seminar2.ipynb notebooks/seminar3.ipynb notebooks/seminar4.ipynb notebooks/seminar5.ipynb
 uvx ruff@0.17.3 check .
 ```
 
