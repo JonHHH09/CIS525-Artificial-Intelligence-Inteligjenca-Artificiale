@@ -11,6 +11,7 @@ Seminar exercises for CIS525 at UET, implemented as Jupyter notebooks in `notebo
 | [Seminar 2](notebooks/seminar2.ipynb) | Dijkstra, road quality, BFS, maze, traces and inline visualizations | Existing exercises |
 | [Seminar 3](notebooks/seminar3.ipynb) | A* starter, zero heuristic and comparisons with Dijkstra/BFS | Assignment in progress |
 | [Seminar 4](notebooks/seminar4.ipynb) | Production systems, forward chaining and a five-question car symptom form in Albanian | Interactive exercise; assignment in progress |
+| [Seminar 5](notebooks/seminar5.ipynb) | Reflex agent that buys, sells or waits in a simulated stock market | Fictional prices or Yahoo Finance quotes |
 
 ## Running it
 
@@ -25,9 +26,11 @@ Open a lesson and choose **Restart Kernel and Run All Cells**. In PyCharm, use t
 
 In Seminar 4, answer the five questions in **Çfarë problemi ka makina juaj?**, then click **Vlerëso përgjigjet**. Each question includes **Nuk e di**. The form shows possible problems, recommendations and the rules supporting them; unmatched answers produce an explicit unknown-condition result. **Fillo nga e para** resets the form. Run All finishes without waiting for keyboard input.
 
+To try Seminar 5 with market quotes, run the cells with the project kernel and click **Nis përditësimin**. `uv sync --locked` installs `yfinance` with the other dependencies. The notebook checks Yahoo Finance for the latest quote about every 10 seconds and updates the chart and simulated portfolio when a new quote arrives. Quotes may be delayed. The fictional-price example also works offline.
+
 ## Layout
 
-The three lesson notebooks are in `notebooks/`. This guide, `pyproject.toml` and `uv.lock` stay at the root. Algorithms are editable in notebook cells; course datasets are editable in these files:
+The lesson notebooks are in `notebooks/`. This guide, `pyproject.toml` and `uv.lock` stay at the root. Algorithms are editable in notebook cells. Dataset files are stored in these folders:
 
 | Folder | Contents | Used by |
 |---|---|---|
@@ -40,10 +43,10 @@ Each undirected road or door appears once in its CSV; loaders add both direction
 
 ## Checking the lessons
 
-Each lesson includes assertions that check its results. Run all cells in a lesson, or check all three from the terminal:
+Each lesson includes assertions that check its results. Run all cells in a lesson, or check every lesson from the terminal:
 
 ```text
-uv run jupyter nbconvert --execute --to notebook --ExecutePreprocessor.timeout=180 --output-dir .notebook-checks notebooks/seminar2.ipynb notebooks/seminar3.ipynb notebooks/seminar4.ipynb
+uv run jupyter nbconvert --execute --to notebook --ExecutePreprocessor.timeout=180 --output-dir .notebook-checks notebooks/seminar2.ipynb notebooks/seminar3.ipynb notebooks/seminar4.ipynb notebooks/seminar5.ipynb
 uvx ruff@0.17.3 check .
 ```
 
